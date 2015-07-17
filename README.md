@@ -1,50 +1,58 @@
-# A Note on This Guide
+# RSpec FizzBuzz
 
-We've been introduced to the concept of test driven development and reading and understanding RSpec tests before. You've been reading these tests for a while now, but TDD is a big topic and we're going to take a cloer look at it here. 
+## A Note on This Guide
 
-You're still not being asked to write your own tests. We're simply aiming to understand the purpose of tests and understand how to read RSpec tests better. 
+We've been introduced to the concept of test driven development (TDD) and reading and understanding RSpec tests before. You've been reading these tests for a while now, but TDD is a big topic and we're going to take a closer look at it here. 
+
+You're still not being asked to write your own tests; we're simply aiming to understand the purpose of testing and how to better read tests in RSpec. 
 
 You can review the earlier lesson on TDD and RSpec testing [here](https://learn.co/tracks/web-development-with-ruby-on-rails/ruby/variables-and-methods/tdd-rspec-and-learn).
 
-# RSpec - Test Driven Development
+## RSpec - Test Driven Development
 
 RSpec is a testing tool for the Ruby programming language. Born under the banner of Behavior-Driven Development, it is designed to make Test-Driven Development a productive and enjoyable experience. The `learn` gem wraps `rspec` with additional functionality, so if you've been using `learn`, you've been using `rspec`.
 
-# What is Test Driven Development?
+## What is Test Driven Development?
 
-Test Driven Development, or TDD, is a method for approaching a problem not through the implementation of the solution, but rather, through the expectations of a working solution. What that means is, instead of trying to write the code that solves the problem, you first define what the working code will do when it works, and then you write the implementation to make it work.
+Test Driven Development (TDD) is a method for approaching a problem not through the implementation of the solution, but rather, through the expectations of a working solution. What that means is, instead of trying to write the code that solves the problem, you first define what the working code will do when it works, and then you write the implementation to make it work.
 
-# Test Driving FizzBuzz
+## Test Driving FizzBuzz
 
-A classic programming problem is [FizzBuzz](http://c2.com/cgi/wiki?FizzBuzzTest). It is considered the [Stairway to Heaven](http://www.codinghorror.com/blog/2007/02/fizzbuzz-the-programmers-stairway-to-heaven.html) of programming because there are so many different ways to play it and everyone plays it.
+A classic programming problem is [FizzBuzz](http://c2.com/cgi/wiki?FizzBuzzTest). It is considered the [Stairway to Heaven](http://www.codinghorror.com/blog/2007/02/fizzbuzz-the-programmers-stairway-to-heaven.html) of programming because (1) there are so many different ways to play it, and (2) everyone plays it.
 
-The goal of fizzbuzz is to build a program that can take a number and if the number is evenly divisible by 3, it should return "Fizz", if it's divisible by 5, it should return "Buzz", and if it's divisible by both 3 and 5, it should return "FizzBuzz".
+The goal of FizzBuzz is to build a program that for any given number will return:
+
+* "Fizz" if is divisible by three (3), 
+* "Buzz" if is divisible by five (5), or
+* "FizzBuzz" is divisible *both* three (3) *and* five (5).
 
 ## Defining Our Expectations
 
-Let's approach solving this problem from a TDD approach. That means what we don't care about is "how", but rather, we care about "what". What will the program do if it works correctly, not how will it do it. We are going to write our expectations first, then our implementation.
+Let's approach solving this problem from a TDD approach. That means, starting out we don't care about the "how", but rather about the "what"—what will the program do if it works correctly, not how will it do it? We are going to write our expectations first, and *then* write our implementation second.
 
-Before we look at the RSpec syntax, let's just express our tests in plain English (also sometimes referred to as "psuedo-code").
+Before we look at the RSpec syntax, let's just express our tests in plain English (also sometimes referred to as "psuedo-code"). Assuming we name our method `fizzbuzz`, we:
 
-1. We expect fizzbuzz(3) to return "Fizz"
-2. We expect fizzbuzz(5) to return "Buzz"
-3. We expect fizzbuzz(15) to return "FizzBuzz"
+* expect `fizzbuzz(3)` to return `"Fizz"`,
+* expect `fizzbuzz(5)` to return `"Buzz"`, and
+* expect `fizzbuzz(15)` to return `"FizzBuzz"`.
 
-Furthermore, we could also provide a negative case.
+Furthermore, we could also provide a negative case. We:
 
-4. We expect fizzbuzz(4) to return nil or nothing or ""
+* expect `fizzbuzz(4)` to return either `nil` or an empty string (`""`).
 
-We don't care how that fizzbuzz method works, or even that it's defined, *we are just stating our expectations*. And we're doing that first. When coding, it's important to have a target to shoot for; by writing your test first, by stating your expectations of your code first, you know your goal. You get to use your entire brain to think about just your goals, not how you'll get there, which adds clarity and focus to the problem.
+We don't care at this point how our `fizzbuzz` method is going to work, or even that it's defined, *we are just setting our expectations*. And we're doing that first. When coding, it's important to have a target to shoot for; by writing our tests first, by stating the expectations of our code before writing, we've established our goals. You will get to accustomed to using your entire brain to think only about your goals at first without worrying about how you'll accomplish them. This approach adds great clarity and focus to your problem solving.
 
 > The competent programmer is fully aware of the strictly limited size of his own skull; therefore he approaches the programming task in full humility.
 >
-> — <cite>Edsger W. Dijkstra</cite>
+> — *Edsger W. Dijkstra*
 
-Test-Driven Development allows us to fully utilize our mental capacity to clearly state the problem we're solving and then to 100% focus on implementing a solution. When you are just coding, you're actually focusing on stating the problem and the solution at the same time. You are thereby splitting your thinking in two, making you less effective at both.
+*Since though the pool of "competent programmers" is hardly limited to men, we'll assume Edsger is using the masculine pronoun in the generic, gender-inclusive form.*
 
-> It's the exact same reason you make a todo list. Also testing is not for present you, it's for future you.
+Test-Driven Development allows us to fully utilize our mental capacity to clearly state the problem we're solving and then to focus completely on implementing a solution. When we jump right into composing code before writing tests for it, we're actually focusing on stating the problem *and* the solution at the same time. In these instances, we're splitting our thinking in two making us less effective at either one.
+
+> It's the exact same reason you make a todo list: testing is not for present you, it's for future you.
 >
-> — <cite>Joe M Burgess</cite>
+> — *Joe M Burgess*
 
 # Introduction to RSpec
 
@@ -206,9 +214,9 @@ Remember, your goal here is not to be able to write that test suite, yet. Your g
 4. When I call that method and pass it a number divisible by 3 and 5, like the number 15 for instance, that method should return the string "FizzBuzz".
 5. When I call that method and pass it a number not divisible by 3 or 5, like the number 4 for instance, that method should return nil.
 
-# How to Run an RSpec Test Suite
+## How to Run an RSpec Test Suite
 
-## Installing RSpec
+### Installing RSpec
 
 Note that, so far, we have not actually written our program. Rather, we've only written code that will confirm that when we *do* write our code, it works correctly. Isn't programming amazing?
 
@@ -275,7 +283,7 @@ $ gem install learn
 Usually, you'll run your tests by typing the `learn` command into your terminal. For the purposes of this lab, we'll run our tests by typing `rspec`. In the real world (i.e. outside of Learn.co's curriculum), you'll use `rspec` to run tests. 
 
 
-## First `rspec` Run
+### First `rspec` Run
 
 Now, from within the directory of this file, type the `rspec` command. Your terminal should have an output that looks something like this:
 
@@ -344,11 +352,11 @@ When looking at `spec/fizzbuzz_spec.rb`, there's only 1 line of it that we haven
 
 Again, the `learn` command wraps RSpec and you will see the same output with `rspec` or `learn`, we recommend using `learn`.
 
-## Reading RSpec Output
+### Reading RSpec Output
 
 Let's look at the output RSpec gave us and dig into it a bit.
 
-### Test Run Summary
+#### Test Run Summary
 
 ```
 rspec
@@ -366,7 +374,7 @@ The line with `FFFF` is important. `F` stands for a failure. As the test suite r
 
 If you're new to programming, you're probably used to things working. So when they are broken, it's scary. In programming, you have to feel the exact opposite way. It is totally normal for everything to be broken. As you code, you fix things, one by one, and then when it all works, you're done for the day.
 
-### Reading a Specific Example Failure
+#### Reading a Specific Example Failure
 
 So, sure, we know philosophically that the reason why our tests are failing is because we did nothing to make them pass. But what, specifically, is the reason they are failing?
 
@@ -394,7 +402,7 @@ We have a `NoMethodError`. There is no method `fizzbuzz`, and the line that is i
 
 So, why did our test fail? Because we did not define a `fizzbuzz` method.
 
-# Solving FizzBuzz
+## Solving FizzBuzz
 
 It is finally time to actually program a solution to fizzbuzz. The first question to answer is where do we put our solution, the actual code we care about, the program we're writing. Let's look at our current directory structure.
 
@@ -428,7 +436,7 @@ end
 
 Now, when we run our spec suite, we could expect to see a new sort of error. After all, we finally started solving fizzbuzz by at least defining a method to solve fizzbuzz.
 
-## A Bit About Your Test Vs Your Program
+### A Bit About Your Test Vs Your Program
 
 Run: `rspec`
 
@@ -502,7 +510,7 @@ Run the test suite one more time with `rspec`, you should see failures in line w
 
 Read that error message; it's brand new! Getting a new error message is a sign of progress. It's one more hint the computer is giving you, one more clue to drive your investigation forward. Now it's complaining that our tests are calling the `fizzbuzz` method with an argument however our definition of `fizzbuzz` accepts no arguments. You'll fix that, but it's important to realize our test suite is now all wired up and we can continue building out our `fizzbuzz` method and running our specs against that code until we have it working.
 
-## Continuing to Solve Fizzbuzz
+### Continuing to Solve Fizzbuzz
 
 That's the end of the tutorial part of this lab. You have enough about RSpec and Ruby to continue solving this in a test driven manner. As you define your `fizzbuzz` method, remember, you can always play with it in IRB. For instance, load an IRB terminal and try (line by line):
 
